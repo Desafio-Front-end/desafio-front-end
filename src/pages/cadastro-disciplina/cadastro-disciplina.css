@@ -1,0 +1,38 @@
+.container-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.card-cadastro {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    gap: 35px;
+}
+
+.card-cadastro-titulo {
+    color: var(--cor-primaria);
+    text-align: center;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card-cadastro-input {
+    width: 100%;
+}
+
+.card-cadastro-input-selector {
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+}
+
+.card-cadastro-button {
+    color: var(--cor-primaria);
+    width: 100%;
+}
