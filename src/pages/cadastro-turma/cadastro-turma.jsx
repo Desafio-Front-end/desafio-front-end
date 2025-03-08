@@ -1,4 +1,4 @@
-import './cadastro-turma.css'
+import './cadastro-turma.css';
 import { Button, Card, CardContent, TextField, MenuItem } from "@mui/material";
 import { TimeField } from '@mui/x-date-pickers/TimeField';
 const opcoesProfessor = [
@@ -112,8 +112,13 @@ export const CadastroTurma = () => {
                   placeholder="0000/0"
                 />
 
-                <TimeField label="Horário" ampm={false}
-                />
+                <div className='card-cadastro-horario'>
+                  <TimeField label="Horário Início" ampm={false}
+                  />
+                  -
+                  <TimeField label="Horário Fim" ampm={false}
+                  />
+                </div>
 
               </div>
               <div className='colunas-coluna'>

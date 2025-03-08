@@ -1,0 +1,27 @@
+.container-matricula {
+    display: flex;
+    padding: 5%;
+    flex-direction: column;
+}
+
+.tittle-button-matricula {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tittle-matricula {
+    color: var(--cor-primaria);
+    text-align: left;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.button-matricular {
+    color: var(--cor-primaria);
+    width: 10%;
+}
+
+.MuiTableCell-head {
+    color: var(--cor-primaria) !important;
+}
