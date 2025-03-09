@@ -2,6 +2,7 @@ import './reset.css';
 import './App.css';
 import './variaveis.css'
 import { BrowserRouter, Routes, Route } from "react-router";
+import { PaginaInicial } from './pages/pagina-inicial/pagina-inicial';
 import { CadastroDisciplina } from './pages/cadastro-disciplina/cadastro-disciplina';
 import { CadastroTurma } from './pages/cadastro-turma/cadastro-turma';
 import { Matricula } from './pages/matricula/matricula';
@@ -27,8 +28,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<>
-                página inicial</>} />
+              <Route path="/pagina-inicial" element={<PaginaInicial />} />
               <Route path="/cadastro-disciplina" element={<CadastroDisciplina />} />
               <Route path="/cadastro-turma" element={<CadastroTurma />} />
               <Route path="/matricula" element={<Matricula />} />
