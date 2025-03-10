@@ -4,6 +4,9 @@ import './variaveis.css'
 import { TurmasCadastradas } from './pages/turmas-cadastradas/turmas-cadastradas';
 import { BrowserRouter, Routes, Route } from "react-router";
 import { PaginaInicial } from './pages/pagina-inicial/pagina-inicial';
+import { HomeInstituicao } from './pages/home-instituicao/home-instituicao';
+import { HomeAluno } from './pages/home-aluno/home-aluno';
+import { HomeProfessor } from './pages/home-professor/home-professor';
 import { CadastroDisciplina } from './pages/cadastro-disciplina/cadastro-disciplina';
 import { CadastroTurma } from './pages/cadastro-turma/cadastro-turma';
 import { Matricula } from './pages/matricula/matricula';
@@ -38,6 +41,9 @@ function App() {
               <Route path="/editar-disciplina" element={<EditarDisciplina />} />
               <Route path="/editar-turma" element={<EditarTurma />} />
               <Route path="/turmas-cadastradas" element={<TurmasCadastradas />} />
+              <Route path="/home-instituicao" element={<HomeInstituicao />} />
+              <Route path="/home-aluno" element={<HomeAluno />} />
+              <Route path="/home-professor" element={<HomeProfessor />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
