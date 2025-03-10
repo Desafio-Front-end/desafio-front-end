@@ -1,9 +1,10 @@
 .container-cadastrese {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: left;
-    height: 80vh;    
+    height: 80vh;
 }
+
 .card-cadastrese {
     background-color: white;
     display: flex;
@@ -13,6 +14,7 @@
     gap: 20px;
 
 }
+
 .card-login {
     background-color: white;
     display: flex;
@@ -20,8 +22,9 @@
     align-items: left;
     padding: 24px;
     gap: 20px;
-    
+
 }
+
 .titulo-paginainicial {
     color: var(--cor-primaria);
     text-align: center;
@@ -30,6 +33,7 @@
     font-weight: bold;
     line-height: 3;
 }
-.espacamento-cards{
+
+.espacamento-cards {
     margin-right: 100px;
 }
