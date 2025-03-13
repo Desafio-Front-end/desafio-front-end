@@ -48,7 +48,7 @@ export const TurmasCadastradas = () => {
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
-                            ))};
+                            ))}
                         </TableBody>
                     </Table>
                 </TableContainer>           

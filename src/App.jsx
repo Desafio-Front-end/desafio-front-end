@@ -12,6 +12,8 @@ import { CadastroTurma } from './pages/cadastro-turma/cadastro-turma';
 import { Matricula } from './pages/matricula/matricula';
 import { EditarDisciplina } from './pages/editar-disciplina/editar-disciplina';
 import { EditarTurma } from './pages/editar-turma/editar-turma';
+import { DisciplinasCadastradas } from './pages/disciplinas-cadastradas/disciplinas-cadastradas';
+import { Disciplinas } from './pages/disciplinas/disciplinas';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -44,6 +46,8 @@ function App() {
               <Route path="/home-instituicao" element={<HomeInstituicao />} />
               <Route path="/home-aluno" element={<HomeAluno />} />
               <Route path="/home-professor" element={<HomeProfessor />} />
+              <Route path="/disciplinas-cadastradas" element={<DisciplinasCadastradas />} />
+              <Route path="/disciplinas" element={<Disciplinas />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
