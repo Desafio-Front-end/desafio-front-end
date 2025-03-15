@@ -1,4 +1,4 @@
-.container-home-instituicao {
+.container-home-professor {
     display: flex;
     justify-content:center;
     align-items: left;
@@ -7,11 +7,19 @@
 .espacamento-titulo-cards{
     margin-top: 125px;
 }
-.card-cadastrardisciplina {
+
+.container-disciplinas-vinculadas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-disciplinas-vinculadas {
     background-color: white;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
+    justify-content: center;
     padding: 24px;
     gap: 20px;
 }
@@ -22,5 +30,9 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
+}
+
+.disciplina-imagem {
+    width: 150px;
 }
 

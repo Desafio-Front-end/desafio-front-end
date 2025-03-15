@@ -13,6 +13,7 @@ import { Matricula } from './pages/matricula/matricula';
 import { EditarDisciplina } from './pages/editar-disciplina/editar-disciplina';
 import { EditarTurma } from './pages/editar-turma/editar-turma';
 import { DisciplinasCadastradas } from './pages/disciplinas-cadastradas/disciplinas-cadastradas';
+import { DisciplinasVinculadas} from './pages/disciplinas-vinculadas/disciplinas-vinculadas';
 import { Disciplinas } from './pages/disciplinas/disciplinas';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -48,6 +49,7 @@ function App() {
               <Route path="/home-professor" element={<HomeProfessor />} />
               <Route path="/disciplinas-cadastradas" element={<DisciplinasCadastradas />} />
               <Route path="/disciplinas" element={<Disciplinas />} />
+              <Route path="/disciplinas-vinculadas" element={<DisciplinasVinculadas />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
