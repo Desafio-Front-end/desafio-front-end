@@ -13,7 +13,7 @@ import { Matricula } from './pages/matricula/matricula';
 import { EditarDisciplina } from './pages/editar-disciplina/editar-disciplina';
 import { EditarTurma } from './pages/editar-turma/editar-turma';
 import { DisciplinasCadastradas } from './pages/disciplinas-cadastradas/disciplinas-cadastradas';
-import { DisciplinasVinculadas} from './pages/disciplinas-vinculadas/disciplinas-vinculadas';
+import { DisciplinasVinculadas } from './pages/disciplinas-vinculadas/disciplinas-vinculadas';
 import { Disciplinas } from './pages/disciplinas/disciplinas';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -37,19 +37,19 @@ function App() {
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Routes>
-              <Route path="/pagina-inicial" element={<PaginaInicial />} />
-              <Route path="/cadastro-disciplina" element={<CadastroDisciplina />} />
-              <Route path="/cadastro-turma" element={<CadastroTurma />} />
-              <Route path="/matricula" element={<Matricula />} />
-              <Route path="/editar-disciplina" element={<EditarDisciplina />} />
-              <Route path="/editar-turma" element={<EditarTurma />} />
-              <Route path="/turmas-cadastradas" element={<TurmasCadastradas />} />
+              <Route path="/" element={<PaginaInicial />} />
               <Route path="/home-instituicao" element={<HomeInstituicao />} />
-              <Route path="/home-aluno" element={<HomeAluno />} />
-              <Route path="/home-professor" element={<HomeProfessor />} />
               <Route path="/disciplinas-cadastradas" element={<DisciplinasCadastradas />} />
-              <Route path="/disciplinas" element={<Disciplinas />} />
+              <Route path="/cadastro-disciplina" element={<CadastroDisciplina />} />
+              <Route path="/editar-disciplina" element={<EditarDisciplina />} />
+              <Route path="/turmas-cadastradas" element={<TurmasCadastradas />} />
+              <Route path="/cadastro-turma" element={<CadastroTurma />} />
+              <Route path="/editar-turma" element={<EditarTurma />} />
+              <Route path="/home-professor" element={<HomeProfessor />} />
               <Route path="/disciplinas-vinculadas" element={<DisciplinasVinculadas />} />
+              <Route path="/home-aluno" element={<HomeAluno />} />
+              <Route path="/matricula" element={<Matricula />} />
+              <Route path="/disciplinas" element={<Disciplinas />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
