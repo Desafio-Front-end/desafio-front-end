@@ -1,8 +1,8 @@
 import { Button, Card, CardContent, MenuItem, TextField } from '@mui/material';
 import { useState } from 'react';
-import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import api from '../../Api';
 
 const opcoesTipoUsuarios = [
     {
@@ -45,7 +45,7 @@ export const CardCadastrese = () => {
 
     const cadastrar = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/usuarios', {
+        api.post('usuarios', {
             nome,
             email,
             senha,
@@ -59,13 +59,13 @@ export const CardCadastrese = () => {
                 setTipoUsuario(1);
                 setOpenSucesso(true);
                 if (tipoUsuario === 1) {
-                    axios.post('http://localhost:3000/instituicoes/adicionar', { idUsuario: resposta.data.id })
+                    api.post('instituicoes/adicionar', { idUsuario: resposta.data.id })
 
                 } if (tipoUsuario === 2) {
-                    axios.post('http://localhost:3000/alunos/adicionar', { idUsuario: resposta.data.id })
+                    api.post('alunos/adicionar', { idUsuario: resposta.data.id })
 
                 } else {
-                    axios.post('http://localhost:3000/professores', { idUsuario: resposta.data.id })
+                    api.post('professores', { idUsuario: resposta.data.id })
 
                 }
             })

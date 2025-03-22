@@ -1,5 +1,4 @@
 import { Button, Card, CardContent, TextField } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
 import api from '../../Api';
 import { useNavigate } from 'react-router';
@@ -10,7 +9,7 @@ export const CardLogin = () => {
     const navigate = useNavigate();
     const login = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3000/auth/login',
+        api.post('auth/login',
             {
                 email,
                 senhaInformada: senha
@@ -20,6 +19,7 @@ export const CardLogin = () => {
                 localStorage.setItem("access_token", resposta.data.access_token);
                 api.get("auth/profile").then((resultado) => {
                     console.log(resultado)
+                    localStorage.setItem("nome", resultado.data.nome);
                     if (resultado.data.tipoUsuario === 2) {
                         navigate("/home-aluno");
                     }

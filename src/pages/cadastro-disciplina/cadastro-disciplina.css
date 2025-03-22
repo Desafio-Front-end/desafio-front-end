@@ -5,6 +5,12 @@
     height: 100vh;
 }
 
+.button-voltar {
+    position: absolute !important;
+    top: 10px;
+    left: 10px;
+}
+
 
 .card-cadastro {
     background-color: white;
