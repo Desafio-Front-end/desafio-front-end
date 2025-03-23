@@ -16,10 +16,10 @@ export const HomeAluno = () => {
 
             <div className='espacamento-titulo-cards'></div>
 
-            <div className='container-home-instituicao'>
+            <div className='container-home-aluno'>
                 <div>
-                    <Card sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}>
-                        <CardContent className='card-cadastrarturma'>
+                    <Card className='card-fazer-matricula' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                        <CardContent>
                             <img src={ImgMatricula} />
                             <h2 className='cadastrar-turma-titulo'>
                                 FAZER MATRÍCULA
@@ -31,9 +31,9 @@ export const HomeAluno = () => {
 
                 </div>
                 <div>
-                    <Card sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}>
-                        <CardContent className='card-cadastrardisciplina'>
-                            <img src={ImgDisciplina} />
+                    <Card className='card-cadastrar-disciplinas' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                        <img src={ImgDisciplina} />
+                        <CardContent>
                             <h2 className='cadastrar-disciplina-titulo'>
                                 DISCIPLINAS
                             </h2>

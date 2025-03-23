@@ -18,9 +18,9 @@ export const HomeInstituicao = () => {
 
             <div className='container-home-instituicao'>
                 <div>
-                    <Card sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}>
-                        <CardContent className='card-cadastrarturma'>
-                            <img src={ImgTurma} />
+                    <Card className='card-cadastrar-turma' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                        <img src={ImgTurma} />
+                        <CardContent>
                             <h2 className='cadastrar-turma-titulo'>
                                 CADASTRAR TURMA
                             </h2>
@@ -31,9 +31,9 @@ export const HomeInstituicao = () => {
 
                 </div>
                 <div>
-                    <Card sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}>
-                        <CardContent className='card-cadastrardisciplina'>
-                            <img src={ImgDisciplina} />
+                    <Card className='card-cadastrar-disciplina' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                        <img src={ImgDisciplina} />
+                        <CardContent>
                             <h2 className='cadastrar-disciplina-titulo'>
                                 CADASTRAR DISCIPLINA
                             </h2>

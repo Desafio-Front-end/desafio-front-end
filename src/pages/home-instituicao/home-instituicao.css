@@ -7,14 +7,6 @@
 .espacamento-titulo-cards{
     margin-top: 125px;
 }
-.card-cadastrarturma {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    padding: 24px;
-    gap: 20px;
-}
 .card-cadastrardisciplina {
     background-color: white;
     display: flex;
@@ -41,5 +33,24 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
+}
+
+.card-cadastrar-turma{
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration: none;
+
+}
+.card-cadastrar-disciplina{
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    text-decoration: none;
+
 }
 

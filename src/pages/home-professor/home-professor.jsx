@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@mui/material';
+import { Card, CardContent, Button } from '@mui/material';
 import './home-professor.css';
 import ImgDisciplina from './../../assets/img-disciplina.png';
 
@@ -17,15 +17,15 @@ export const HomeProfessor = () => {
 
 
             <div className='container-home-professor'>
-                <Card sx={{ width: 300, height: 300, padding: '10px' }} className='container-disciplinas-vinculadas'>
-                    <CardContent className='card-disciplinas-vinculadas'>
-                        <img src={ImgDisciplina} className='disciplina-imagem'/>
+                <Card className='card-disciplinas-vinculadas' sx={{ width: 250, height: 250, padding: '10px' }} component={Button}>
+                    <img src={ImgDisciplina}/>
+                    <CardContent>
                         <h2 className='cadastrar-disciplina-titulo'>
                             DISCIPLINAS VINCULADAS
                         </h2>
                     </CardContent>
                 </Card>
-            </div>
+            </div>  
 
 
         </>)
