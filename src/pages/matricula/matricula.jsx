@@ -63,7 +63,6 @@ export const Matricula = () => {
                                 <TableCell align="center">SEMESTRE</TableCell>
                                 <TableCell align="center">DIA</TableCell>
                                 <TableCell align="center">TURNO</TableCell>
-                                <TableCell align="center">HORÁRIO</TableCell>
                                 <TableCell align="center"><Checkbox onChange={toggleAllLinhas} /></TableCell>
                             </TableRow>
                         </TableHead>
@@ -83,7 +82,6 @@ export const Matricula = () => {
                                     <TableCell align="center">{row.semestre}</TableCell>
                                     <TableCell align="center">{row.dia}</TableCell>
                                     <TableCell align="center">{row.turno}</TableCell>
-                                    <TableCell align="center">{row.horario}</TableCell>
                                     <TableCell align="center"><Checkbox checked={linhasSelecionadas.includes(row.id)}
                                         onChange={(event) => toggleLinha(event, row.id)} /></TableCell>
                                 </TableRow>

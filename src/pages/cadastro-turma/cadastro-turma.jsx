@@ -107,18 +107,21 @@ export const CadastroTurma = () => {
                 </TextField>
 
                 <TextField
+                  className='card-cadastro-turma-input-selector'
+                  label="Dia"
+                  select>
+                  {opcoesDiaDaSemana.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
                   className='card-cadastro-turma-input'
                   label="Ano/Semestre"
                   placeholder="0000/0"
                 />
-
-                <div className='card-cadastro-horario'>
-                  <TimeField label="Horário Início" ampm={false}
-                  />
-                  -
-                  <TimeField label="Horário Fim" ampm={false}
-                  />
-                </div>
 
               </div>
               <div className='colunas-coluna'>
@@ -136,16 +139,7 @@ export const CadastroTurma = () => {
                   className='card-cadastro-turma-input'
                   label="N° de vagas"
                 />
-                <TextField
-                  className='card-cadastro-turma-input-selector'
-                  label="Dia"
-                  select>
-                  {opcoesDiaDaSemana.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
+
                 <TextField
                   className='card-cadastro-turma-input-selector'
                   label="Turno"
@@ -156,6 +150,7 @@ export const CadastroTurma = () => {
                     </MenuItem>
                   ))}
                 </TextField>
+
               </div>
             </div>
 
