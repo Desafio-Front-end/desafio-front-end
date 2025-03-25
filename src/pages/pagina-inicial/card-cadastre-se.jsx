@@ -61,7 +61,7 @@ export const CardCadastrese = () => {
                 if (tipoUsuario === 1) {
                     api.post('instituicoes/adicionar', { idUsuario: resposta.data.id })
 
-                } if (tipoUsuario === 2) {
+                } else if (tipoUsuario === 2) {
                     api.post('alunos/adicionar', { idUsuario: resposta.data.id })
 
                 } else {

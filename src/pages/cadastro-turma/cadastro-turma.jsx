@@ -1,42 +1,12 @@
 import './cadastro-turma.css';
-import { Button, Card, CardContent, TextField, MenuItem } from "@mui/material";
-import { TimeField } from '@mui/x-date-pickers/TimeField';
-const opcoesProfessor = [
-  {
-    value: '1',
-    label: 'Maria Alves',
-  },
-  {
-    value: '2',
-    label: 'Lúcio Martins',
-  },
-  {
-    value: '3',
-    label: 'Carlos Silva',
-  },
-  {
-    value: '4',
-    label: 'Ana Veiga',
-  },
-];
-const opcoesPreRequisito = [
-  {
-    value: '1',
-    label: 'Programação Back-end',
-  },
-  {
-    value: '2',
-    label: 'Testes de Software',
-  },
-  {
-    value: '3',
-    label: 'Redes de Computadores',
-  },
-  {
-    value: '4',
-    label: 'Desenvolvimento Web',
-  },
-];
+import { Button, Card, CardContent, TextField, MenuItem, IconButton } from "@mui/material";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import api from '../../Api';
+
 const opcoesDiaDaSemana = [
   {
     value: '2',
@@ -63,6 +33,7 @@ const opcoesDiaDaSemana = [
     label: 'Sábado',
   },
 ];
+
 const opcoesTurno = [
   {
     value: '1',
@@ -77,86 +48,170 @@ const opcoesTurno = [
     label: 'Noite',
   },
 ];
+
+
+
 export const CadastroTurma = () => {
+  const [professores, setProfessores] = useState([]);
+  const [professorSelecionado, setProfessorSelecionado] = useState(null);
+  const [disciplinas, setDisciplinas] = useState([])
+  const [disciplinaSelecionada, setDisciplinaSelecionada] = useState(null)
+  const [numVagas, setNumVagas] = useState(0);
+  const [anoSemestre, setAnoSemestre] = useState("");
+  const [diaSelecionado, setDiaSelecionado] = useState("2");
+  const [turnoSelecionado, setTurnoSelecionado] = useState("1");
+  const navigate = useNavigate();
+
+  const [openErro, setOpenErro] = useState(false);
+  const handleCloseErro = (_, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenErro(false);
+  };
+
+  const cadastrarTurma = (e) => {
+    e.preventDefault();
+    api.post('turmas', {
+      idProfessor: professorSelecionado,
+      idDisciplina: disciplinaSelecionada,
+      numVagas,
+      anoSemestre,
+      horarioTurno: diaSelecionado + turnoSelecionado
+
+    })
+      .then(function () {
+        navigate('/turmas-cadastradas')
+      })
+      .catch(function () {
+        setOpenErro(true);
+      })
+  }
+
+  useEffect(() => {
+    api.get('disciplinas').then(function (resposta) {
+      setDisciplinas(resposta.data);
+    })
+  }, [])
+
+  useEffect(() => {
+    api.get('professores').then(function (resposta) {
+      setProfessores(resposta.data);
+    })
+  }, [])
+
   return (
     <>
       <div className='container-cadastro-turma'>
 
-        <Card sx={{ width: 600, padding: '24px' }} >
-          <CardContent className='card-cadastro-turma'>
-            <h2 className='card-cadastro-titulo-turma'>
-              CADASTRAR TURMA
-            </h2>
-            <div className='card-cadastro-turma-colunas'>
-              <div className='colunas-coluna'>
+        <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/turmas-cadastradas")}>
+          <ArrowBackIcon fontSize='inherit' />
+        </IconButton>
 
-                <TextField
-                  className='card-cadastro-turma-input'
-                  label="Turma"
-                />
 
-                <TextField
-                  className='card-cadastro-turma-input-selector'
-                  label="Professor(a)"
-                  select>
-                  {opcoesProfessor.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
+        <form onSubmit={cadastrarTurma}>
+          <Card sx={{ width: 600, padding: '24px' }} >
+            <CardContent className='card-cadastro-turma'>
+              <h2 className='card-cadastro-titulo-turma'>
+                CADASTRAR TURMA
+              </h2>
+              <div className='card-cadastro-turma-colunas'>
+                <div className='colunas-coluna'>
 
-                <TextField
-                  className='card-cadastro-turma-input-selector'
-                  label="Dia"
-                  select>
-                  {opcoesDiaDaSemana.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                  <TextField
+                    className='card-cadastro-turma-input-selector'
+                    label="Professor(a)"
+                    select
+                    required
+                    value={professorSelecionado}
+                    onChange={(e) => setProfessorSelecionado(e.target.value)}>
+                    {professores.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.usuario.nome}
+                      </MenuItem>
+                    ))}
+                  </TextField>
 
-                <TextField
-                  className='card-cadastro-turma-input'
-                  label="Ano/Semestre"
-                  placeholder="0000/0"
-                />
+                  <TextField
+                    className='card-cadastro-turma-input'
+                    label="N° de vagas"
+                    required
+                    value={numVagas}
+                    onChange={(e) => setNumVagas(e.target.value)}
+                  />
 
+                  <TextField
+                    className='card-cadastro-turma-input-selector'
+                    label="Dia"
+                    select
+                    required
+                    value={diaSelecionado}
+                    onChange={(e) => setDiaSelecionado(e.target.value)}>
+                    {opcoesDiaDaSemana.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+
+                </div>
+                <div className='colunas-coluna'>
+                  <TextField
+                    className='card-cadastro-turma-input-selector'
+                    label="Disciplina"
+                    select
+                    required
+                    value={disciplinaSelecionada}
+                    onChange={(e) => setDisciplinaSelecionada(e.target.value)}>
+                    {disciplinas.map((option) => (
+                      <MenuItem key={option.id} value={option.id}>
+                        {option.nome}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                  <TextField
+                    className='card-cadastro-turma-input'
+                    label="Ano/Semestre"
+                    placeholder="0000/0"
+                    required
+                    value={anoSemestre}
+                    onChange={(e) => setAnoSemestre(e.target.value)}
+                  />
+
+                  <TextField
+                    className='card-cadastro-turma-input-selector'
+                    label="Turno"
+                    select
+                    required
+                    value={turnoSelecionado}
+                    onChange={(e) => setTurnoSelecionado(e.target.value)}>
+                    {opcoesTurno.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+
+                </div>
               </div>
-              <div className='colunas-coluna'>
-                <TextField
-                  className='card-cadastro-turma-input-selector'
-                  label="Disciplina"
-                  select>
-                  {opcoesPreRequisito.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-                <TextField
-                  className='card-cadastro-turma-input'
-                  label="N° de vagas"
-                />
 
-                <TextField
-                  className='card-cadastro-turma-input-selector'
-                  label="Turno"
-                  select>
-                  {opcoesTurno.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-
-              </div>
-            </div>
-
-            <Button variant="contained" className='card-cadastro-turma-button'>CADASTRAR</Button>
-          </CardContent>
-        </Card>
+              <Button variant="contained" className='card-cadastro-turma-button' type='submit'>CADASTRAR</Button>
+            </CardContent>
+          </Card>
+        </form>
+        <Snackbar open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
+          <Alert
+            onClose={handleCloseErro}
+            severity='error'
+            variant='filled'
+            sx={{ width: '100%' }}
+          >
+            Problema ao realizar ao cadastro!
+          </Alert>
+        </Snackbar>
       </div >
     </>
   );

@@ -91,11 +91,6 @@ export const EditarTurma = () => {
               <div className='colunas-coluna'>
 
                 <TextField
-                  className='card-editar-turma-input'
-                  label="Turma"
-                />
-
-                <TextField
                   className='card-editar-turma-input-selector'
                   label="Professor(a)"
                   select>
@@ -107,6 +102,11 @@ export const EditarTurma = () => {
                 </TextField>
 
                 <TextField
+                  className='card-editar-turma-input'
+                  label="N° de vagas"
+                />
+
+                <TextField
                   className='card-editar-turma-input-selector'
                   label="Dia"
                   select>
@@ -116,14 +116,6 @@ export const EditarTurma = () => {
                     </MenuItem>
                   ))}
                 </TextField>
-
-                <TextField
-                  className='card-editar-turma-input'
-                  label="Ano/Semestre"
-                  placeholder="0000/0"
-                />
-
-
 
               </div>
               <div className='colunas-coluna'>
@@ -137,9 +129,12 @@ export const EditarTurma = () => {
                     </MenuItem>
                   ))}
                 </TextField>
+
+
                 <TextField
                   className='card-editar-turma-input'
-                  label="N° de vagas"
+                  label="Ano/Semestre"
+                  placeholder="0000/0"
                 />
 
                 <TextField
