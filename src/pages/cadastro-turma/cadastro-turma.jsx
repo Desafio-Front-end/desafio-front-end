@@ -6,6 +6,7 @@ import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import api from '../../Api';
+import { useMask } from '@react-input/mask';
 
 const opcoesDiaDaSemana = [
   {
@@ -61,6 +62,10 @@ export const CadastroTurma = () => {
   const [diaSelecionado, setDiaSelecionado] = useState("2");
   const [turnoSelecionado, setTurnoSelecionado] = useState("1");
   const navigate = useNavigate();
+  const inputRef = useMask({
+    mask: '0000/0',
+    replacement: { '0': /\d/ },
+  });
 
   const [openErro, setOpenErro] = useState(false);
   const handleCloseErro = (_, reason) => {
@@ -177,6 +182,7 @@ export const CadastroTurma = () => {
                     label="Ano/Semestre"
                     placeholder="0000/0"
                     required
+                    inputRef={inputRef}
                     value={anoSemestre}
                     onChange={(e) => setAnoSemestre(e.target.value)}
                   />

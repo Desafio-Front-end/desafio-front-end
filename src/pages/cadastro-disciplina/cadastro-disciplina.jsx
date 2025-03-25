@@ -39,7 +39,6 @@ export const CadastroDisciplina = () => {
 
     useEffect(() => {
         api.get('disciplinas').then(function (resposta) {
-            console.log(resposta.data);
             setPreRequisitos(resposta.data);
         })
     }, [])
