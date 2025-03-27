@@ -1,28 +1,80 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import api from '../../Api';
+import { useNavigate } from 'react-router';
 import './matricula.css';
 import {
     Button, Checkbox, Table, TableBody, TableCell, TableContainer,
-    TableHead, TablePagination, TableRow, Paper
+    TableHead, TablePagination, TableRow, Paper, IconButton
 } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
-const linhas = [
-    { id: 1, turma: 'A1', disciplina: 'Matemática', professor: 'Carlos Silva', n_vagas: 30, ano: 2024, semestre: 1, dia: 'Segunda-feira', turno: 'Manhã', horario: '08:00 - 10:00' },
-    { id: 2, turma: 'B1', disciplina: 'História', professor: 'Ana Souza', n_vagas: 25, ano: 2024, semestre: 1, dia: 'Terça-feira', turno: 'Tarde', horario: '14:00 - 16:00' },
-    { id: 3, turma: 'C1', disciplina: 'Física', professor: 'Marcos Oliveira', n_vagas: 20, ano: 2024, semestre: 1, dia: 'Quarta-feira', turno: 'Noite', horario: '19:00 - 21:00' },
-    { id: 4, turma: 'A2', disciplina: 'Química', professor: 'Fernanda Lima', n_vagas: 28, ano: 2024, semestre: 1, dia: 'Quinta-feira', turno: 'Manhã', horario: '10:00 - 12:00' },
-    { id: 5, turma: 'B2', disciplina: 'Inglês', professor: 'Roberto Mendes', n_vagas: 22, ano: 2024, semestre: 1, dia: 'Sexta-feira', turno: 'Tarde', horario: '16:00 - 18:00' },
-    { id: 6, turma: 'C2', disciplina: 'Biologia', professor: 'Juliana Costa', n_vagas: 18, ano: 2024, semestre: 1, dia: 'Segunda-feira', turno: 'Noite', horario: '18:30 - 20:30' },
-    { id: 7, turma: 'A3', disciplina: 'Geografia', professor: 'Lucas Pereira', n_vagas: 26, ano: 2024, semestre: 1, dia: 'Terça-feira', turno: 'Manhã', horario: '08:00 - 10:00' },
-    { id: 8, turma: 'B3', disciplina: 'Educação Física', professor: 'Vanessa Santos', n_vagas: 32, ano: 2024, semestre: 1, dia: 'Quarta-feira', turno: 'Tarde', horario: '14:00 - 16:00' },
-    { id: 9, turma: 'C3', disciplina: 'Artes', professor: 'Felipe Nogueira', n_vagas: 24, ano: 2024, semestre: 1, dia: 'Quinta-feira', turno: 'Noite', horario: '19:00 - 21:00' },
-];
+const diasSemana = {
+    2: "Segunda-feira",
+    3: "Terça-feira",
+    4: "Quarta-feira",
+    5: "Quinta-feira",
+    6: "Sexta-feira",
+    7: "Sábado"
+}
+
+const turno = {
+    1: "Manhã",
+    2: "Tarde",
+    3: "Noite"
+}
+
 
 export const Matricula = () => {
+
+    const [turmas, setTurmas] = useState([]);
+    const [matriculasAluno, setMatriculasAluno] = useState([])
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        api.get('turmas/listar').then(function (resposta) {
+            setTurmas(resposta.data);
+        })
+    }, []);
+
+    useEffect(() => {
+        api.get('matriculas/listarMatriculasAluno').then(function (resposta) {
+            console.log(resposta.data);
+            setMatriculasAluno(resposta.data);
+        })
+    }, []);
+
+    useEffect(() => {
+        setTurmas((oldTurmas) => {
+            const turmasMatriculadas = matriculasAluno.map(matricula => matricula.idTurma)
+            const turmasFiltradas = oldTurmas.filter((turma) => {
+                return !turmasMatriculadas.includes(turma.id);
+            })
+            return turmasFiltradas;
+        });
+    }, [matriculasAluno]);
+
+
+
+    const matricular = () => {
+
+        const matriculas = linhasSelecionadas.map((idTurma) =>
+            api.post('matriculas/cadastro', {
+                idTurma: idTurma,
+                status: "em andamento"
+            })
+        )
+        Promise.all(matriculas).then(function () {
+            navigate('/disciplinas')
+        })
+
+
+    }
+
     //LOGÍCA DE PAGINAÇÃO
     const porPagina = 4;
     const [pagina, setPagina] = useState(0);
-    const linhasPaginadas = linhas.slice(pagina * porPagina, (pagina + 1) * porPagina);
+    const linhasPaginadas = turmas.slice(pagina * porPagina, (pagina + 1) * porPagina);
 
     //LÓGICA DE SELEÇÃO DE LINHAS
     const [linhasSelecionadas, setLinhasSelecionadas] = useState([]);
@@ -39,7 +91,7 @@ export const Matricula = () => {
     const toggleAllLinhas = (event) => {
         // NO IF 
         if (event.target.checked) {
-            setLinhasSelecionadas(linhas.map(linha => linha.id))
+            setLinhasSelecionadas(turmas.map(linha => linha.id))
         } else {
             setLinhasSelecionadas([]);
         }
@@ -47,54 +99,71 @@ export const Matricula = () => {
     return (
         <>
             <div className='container-matricula'>
-                <div className='tittle-button-matricula'>
-                    <h2 className='tittle-matricula'>MATRÍCULA</h2>
-                    <Button variant="contained" className='button-matricular'>MATRICULAR</Button>
-                </div>
-                <TableContainer component={Paper} sx={{ marginTop: '16px' }}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>TURMA</TableCell>
-                                <TableCell align="center">DISCIPLINA</TableCell>
-                                <TableCell align="center">PROFESSOR</TableCell>
-                                <TableCell align="center">N° VAGAS</TableCell>
-                                <TableCell align="center">ANO</TableCell>
-                                <TableCell align="center">SEMESTRE</TableCell>
-                                <TableCell align="center">DIA</TableCell>
-                                <TableCell align="center">TURNO</TableCell>
-                                <TableCell align="center"><Checkbox onChange={toggleAllLinhas} /></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {linhasPaginadas.map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell component="th" scope="row">
-                                        {row.turma}
-                                    </TableCell>
-                                    <TableCell align="center">{row.disciplina}</TableCell>
-                                    <TableCell align="center">{row.professor}</TableCell>
-                                    <TableCell align="center">{row.n_vagas}</TableCell>
-                                    <TableCell align="center">{row.ano}</TableCell>
-                                    <TableCell align="center">{row.semestre}</TableCell>
-                                    <TableCell align="center">{row.dia}</TableCell>
-                                    <TableCell align="center">{row.turno}</TableCell>
-                                    <TableCell align="center"><Checkbox checked={linhasSelecionadas.includes(row.id)}
-                                        onChange={(event) => toggleLinha(event, row.id)} /></TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    count={linhas.length}
-                    page={pagina}
-                    rowsPerPageOptions={[porPagina]}
-                    rowsPerPage={porPagina}
-                    onPageChange={(_, page) => setPagina(page)} />
+                <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/home-aluno")}>
+                    <ArrowBackIcon fontSize='inherit' />
+                </IconButton>
+                {turmas.length === 0 ?
+                    <>
+                        <div className='content-matricula-finalizada'>
+                            <h2 className='tittle-matricula'>Sem matrícula disponível</h2>
+                            <div className='matricula-finalizada-p'>
+                                <p>É um prazer ter você como estudante!
+                                    Informamos que não há necessidade de renovar sua matrícula.</p>
+                                <p>Estamos à disposição para ajudar você com qualquer dúvida.</p>
+                                <p>Bons estudos!</p>
+                            </div>
+                        </div>
+                        <div className='img-tudo-certo'>
+
+                        </div>
+                    </> :
+                    <>
+                        <div className='tittle-button-matricula'>
+                            <h2 className='tittle-matricula'>MATRÍCULA</h2>
+                            <Button variant="contained" className='button-matricular' disabled={linhasSelecionadas.length === 0} onClick={matricular}>MATRICULAR</Button>
+                        </div>
+                        <TableContainer component={Paper} sx={{ marginTop: '16px' }}>
+                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell align='center'>TURMA</TableCell>
+                                        <TableCell align="center">DISCIPLINA</TableCell>
+                                        <TableCell align="center">PROFESSOR</TableCell>
+                                        <TableCell align="center">N° VAGAS</TableCell>
+                                        <TableCell align="center">ANO/SEMESTRE</TableCell>
+                                        <TableCell align="center">DIA</TableCell>
+                                        <TableCell align="center">TURNO</TableCell>
+                                        <TableCell align="center"><Checkbox onChange={toggleAllLinhas} /></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {linhasPaginadas.map((row) => (
+                                        <TableRow
+                                            key={row.id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align='center'>{row.id}</TableCell>
+                                            <TableCell align="center">{row.disciplina.nome}</TableCell>
+                                            <TableCell align="center">{row.professor.usuario.nome}</TableCell>
+                                            <TableCell align="center">{row.numVagas}</TableCell>
+                                            <TableCell align="center">{row.anoSemestre}</TableCell>
+                                            <TableCell align="center">{diasSemana[row.horarioTurno[0]]}</TableCell>
+                                            <TableCell align="center">{turno[row.horarioTurno[1]]}</TableCell>
+                                            <TableCell align="center"><Checkbox checked={linhasSelecionadas.includes(row.id)}
+                                                onChange={(event) => toggleLinha(event, row.id)} /></TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            count={turmas.length}
+                            page={pagina}
+                            rowsPerPageOptions={[porPagina]}
+                            rowsPerPage={porPagina}
+                            onPageChange={(_, page) => setPagina(page)} />
+                    </>
+                }
 
             </div>
         </>

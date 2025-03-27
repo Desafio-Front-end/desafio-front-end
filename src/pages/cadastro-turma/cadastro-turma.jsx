@@ -63,8 +63,8 @@ export const CadastroTurma = () => {
   const [turnoSelecionado, setTurnoSelecionado] = useState("1");
   const navigate = useNavigate();
   const inputRef = useMask({
-    mask: '0000/0',
-    replacement: { '0': /\d/ },
+    mask: '____/_',
+    replacement: { '_': /\d/ },
   });
 
   const [openErro, setOpenErro] = useState(false);
@@ -78,10 +78,10 @@ export const CadastroTurma = () => {
 
   const cadastrarTurma = (e) => {
     e.preventDefault();
-    api.post('turmas', {
+    api.post('turmas/cadastrar', {
       idProfessor: professorSelecionado,
       idDisciplina: disciplinaSelecionada,
-      numVagas,
+      numVagas: parseInt(numVagas),
       anoSemestre,
       horarioTurno: diaSelecionado + turnoSelecionado
 
@@ -143,6 +143,7 @@ export const CadastroTurma = () => {
                     label="N° de vagas"
                     required
                     value={numVagas}
+                    type='number'
                     onChange={(e) => setNumVagas(e.target.value)}
                   />
 

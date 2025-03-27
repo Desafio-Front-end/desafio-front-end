@@ -4,6 +4,31 @@
     flex-direction: column;
 }
 
+
+.content-matricula-finalizada {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.matricula-finalizada-p {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: "Roboto Condensed", sans-serif;
+    margin-top: 10px;
+
+}
+
+.img-tudo-certo {
+    width: 300px;
+    height: 300px;
+    background-image: url("https://eadunisinos.grupoa.education/academic-services/web-components/default/img/high-five.89ef379.svg");
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .tittle-button-matricula {
     display: flex;
     justify-content: space-between;
