@@ -38,7 +38,7 @@ export const DisciplinasVinculadas = () => {
     }, []);
 
     useEffect(() => {
-        api.get('disciplinas')
+        api.get('disciplinas/professor')
             .then((resposta) => {
                 setDisciplinas(resposta.data);
             })
@@ -79,7 +79,6 @@ export const DisciplinasVinculadas = () => {
                                     <TableCell align="center">ANO/SEMESTRE</TableCell>
                                     <TableCell align="center">DIA</TableCell>
                                     <TableCell align="center">TURNO</TableCell>
-                                    <TableCell align="center">STATUS</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -94,7 +93,6 @@ export const DisciplinasVinculadas = () => {
                                         <TableCell align="center">{row.anoSemestre ?? "Não informado."}</TableCell>
                                         <TableCell align="center">{diasSemana[row.horarioTurno[0]]}</TableCell>
                                         <TableCell align="center">{turno[row.horarioTurno[1]]}</TableCell>
-                                        <TableCell align="center">?</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
