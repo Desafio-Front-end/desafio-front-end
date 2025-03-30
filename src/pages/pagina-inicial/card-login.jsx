@@ -22,6 +22,10 @@ export const CardLogin = () => {
                     localStorage.setItem("nome", resultado.data.nome);
                     if (resultado.data.tipoUsuario === 2) {
                         navigate("/home-aluno");
+                    }else if(resultado.data.tipoUsuario === 1){
+                        navigate("/home-instituicao");
+                    }else{
+                        navigate("/home-professor");
                     }
 
                 })
