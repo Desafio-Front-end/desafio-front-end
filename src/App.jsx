@@ -46,7 +46,7 @@ function App() {
               <Route path="/cadastro-turma" element={<CadastroTurma />} />
               <Route path="/editar-turma" element={<EditarTurma />} />
               <Route path="/home-professor" element={<HomeProfessor />} />
-              <Route path="/disciplinas-vinculadas" element={<DisciplinasVinculadas />} />
+              <Route path="/home-professor/disciplinas-vinculadas" element={<DisciplinasVinculadas />} />
               <Route path="/home-aluno" element={<HomeAluno />} />
               <Route path="/matricula" element={<Matricula />} />
               <Route path="/disciplinas" element={<Disciplinas />} />

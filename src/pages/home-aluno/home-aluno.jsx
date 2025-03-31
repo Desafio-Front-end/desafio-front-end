@@ -6,18 +6,19 @@ import ImgTurma from './../../assets/img-turma.png';
 
 
 export const HomeAluno = () => {
+    const alunoNome = localStorage.getItem("nome").toUpperCase()
     return (
         <>
             <div>
                 <h2 className='titulo-paginainicial'>
-                    BEM-VINDO, nome do aluno
+                    BEM-VINDO, {alunoNome}!
                 </h2>
             </div>
 
             <div className='espacamento-titulo-cards'></div>
 
             <div className='container-home-aluno'>
-                <div>
+                <div onClick={() => window.location.href = '/matricula'}>
                     <Card className='card-fazer-matricula' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
                         <CardContent>
                             <img src={ImgMatricula} />
@@ -27,10 +28,10 @@ export const HomeAluno = () => {
                         </CardContent>
                     </Card>
                 </div>
-                <div className='espacamento-cards'>
 
-                </div>
-                <div>
+                <div className='espacamento-cards'></div>
+
+                <div onClick={() => window.location.href = '/disciplinas'}>
                     <Card className='card-cadastrar-disciplinas' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
                         <img src={ImgDisciplina} />
                         <CardContent>

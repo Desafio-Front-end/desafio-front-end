@@ -6,18 +6,19 @@ import ImgTurma from './../../assets/img-turma.png';
 
 
 export const HomeInstituicao = () => {
+    const instituicaoNome = localStorage.getItem("nome").toUpperCase()
     return (
         <>
             <div>
                 <h2 className='titulo-paginainicial'>
-                    BEM-VINDO, nome da Instituição
+                    BEM-VINDO, {instituicaoNome}
                 </h2>
             </div>
 
             <div className='espacamento-titulo-cards'></div>
 
             <div className='container-home-instituicao'>
-                <div>
+                <div onClick={() => window.location.href = '/cadastro-turma'}>
                     <Card className='card-cadastrar-turma' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
                         <img src={ImgTurma} />
                         <CardContent>
@@ -27,10 +28,10 @@ export const HomeInstituicao = () => {
                         </CardContent>
                     </Card>
                 </div>
-                <div className='espacamento-cards'>
 
-                </div>
-                <div>
+                <div className='espacamento-cards'></div>
+
+                <div onClick={() => window.location.href = '/cadastro-disciplina'}>
                     <Card className='card-cadastrar-disciplina' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
                         <img src={ImgDisciplina} />
                         <CardContent>
