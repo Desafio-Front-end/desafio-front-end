@@ -50,6 +50,8 @@ function App() {
               <Route path="/home-aluno" element={<HomeAluno />} />
               <Route path="/matricula" element={<Matricula />} />
               <Route path="/disciplinas" element={<Disciplinas />} />
+              <Route path="/editar-disciplina/:id" element={<EditarDisciplina />} />
+              <Route path="/editar-turma/:id" element={<EditarTurma/>} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
