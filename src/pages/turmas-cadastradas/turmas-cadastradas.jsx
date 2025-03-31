@@ -1,7 +1,7 @@
 import { Delete, Edit, ArrowBack as ArrowBackIcon } from '@mui/icons-material';
 import { Button, Card, CardContent, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, IconButton } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router'; // Importando useNavigate
+import { useNavigate } from 'react-router';
 import './turmas-cadastradas.css';
 
 export const TurmasCadastradas = () => {
