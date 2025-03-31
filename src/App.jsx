@@ -52,6 +52,7 @@ function App() {
               <Route path="/disciplinas" element={<Disciplinas />} />
               <Route path="/editar-disciplina/:id" element={<EditarDisciplina />} />
               <Route path="/editar-turma/:id" element={<EditarTurma/>} />
+              <Route path="/turmas-cadastradas/:id" element={<TurmasCadastradas/>} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
