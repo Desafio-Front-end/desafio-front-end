@@ -28,28 +28,28 @@ export const EditarDisciplina = () => {
     //funcao para editar a disciplina
     const editarDisciplina = (e) => {
         e.preventDefault();
-        api.patch(`disciplinas/`+params.id, { //patch atualiza a disciplina pelo params.id
+        api.patch(`disciplinas/` + params.id, { //patch atualiza a disciplina pelo params.id
             nome,
             preRequisito: preRequisitoSelecionado || null
         })
-        .then(function() {
-            navigate("/disciplinas-cadastradas"); //usuario é direcionado para a tela de turmas cadastradas
-        })
-        .catch(function() {
-            setOpenErro(true); //se der errado é exibido a mensagem problema
-        });
+            .then(function () {
+                navigate("/disciplinas-cadastradas"); //usuario é direcionado para a tela de turmas cadastradas
+            })
+            .catch(function () {
+                setOpenErro(true); //se der errado é exibido a mensagem problema
+            });
     };
 
     //carrega a lista de pré-requisitos
     useEffect(() => {
-        api.get('disciplinas').then(function(resposta) {
+        api.get('disciplinas/instituicao').then(function (resposta) {
             setPreRequisitos(resposta.data);
         })
     }, []);
 
     //busca os dados da disciplina pra preencher o formulário
     useEffect(() => {
-        api.get(`disciplinas/`+params.id).then(function(resposta){ 
+        api.get(`disciplinas/` + params.id).then(function (resposta) {
             setNome(resposta.data.nome);
             setPreRequisitoSelecionado(resposta.data.preRequisito);
         })

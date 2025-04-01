@@ -38,7 +38,7 @@ export const CadastroDisciplina = () => {
     }
 
     useEffect(() => {
-        api.get('disciplinas').then(function (resposta) {
+        api.get('disciplinas/instituicao').then(function (resposta) {
             setPreRequisitos(resposta.data);
         })
     }, [])
