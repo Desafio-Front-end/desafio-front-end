@@ -28,7 +28,7 @@ export const EditarDisciplina = () => {
     //funcao para editar a disciplina
     const editarDisciplina = (e) => {
         e.preventDefault();
-        api.patch(`disciplinas/` + params.id, { //patch atualiza a disciplina pelo params.id
+        api.patch('disciplinas' + params.id, { //patch atualiza a disciplina pelo params.id
             nome,
             preRequisito: preRequisitoSelecionado || null
         })
@@ -42,7 +42,7 @@ export const EditarDisciplina = () => {
 
     //carrega a lista de pré-requisitos
     useEffect(() => {
-        api.get('disciplinas').then(function(resposta) {
+        api.get('disciplinas/instituicao').then(function(resposta) {
             setPreRequisitos(resposta.data);
         })
     }, []);
