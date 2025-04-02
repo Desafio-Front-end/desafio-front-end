@@ -29,7 +29,7 @@ export const TurmasCadastradas = () => {
 
     //funcao para voltar para a pagina anterior
     const voltar = () => {
-        navigate(`/cadastro-turma`); 
+        navigate(`/home-instituicao`); 
     };
 
     return (

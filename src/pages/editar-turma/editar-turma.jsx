@@ -72,7 +72,7 @@ export const EditarTurma = () => {
 
   //carrega a lista de disciplinas e armazena na variavel disciplinas
   useEffect(() => {
-    api.get('disciplinas').then(function (resposta) {
+    api.get('disciplinas/instituicao').then(function (resposta) {
       setDisciplinas(resposta.data);
     });
   }, []);
