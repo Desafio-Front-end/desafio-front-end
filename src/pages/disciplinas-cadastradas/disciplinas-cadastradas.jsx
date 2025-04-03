@@ -4,7 +4,7 @@ import './disciplinas-cadastradas.css';
 import api from '../../Api';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import HomeIcon from '@mui/icons-material/Home';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const DisciplinasCadastradas = () => {
     const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const DisciplinasCadastradas = () => {
         <div className='container-disciplinas-cadastradas'>          
 
             <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/home-instituicao")}>
-                <HomeIcon fontSize='inherit' />
+                <ArrowBackIcon fontSize='inherit' />
             </IconButton>           
 
                 <div className='titulo-disciplinas-cadastradas'>
