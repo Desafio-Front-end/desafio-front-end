@@ -28,7 +28,7 @@ export const EditarDisciplina = () => {
     //funcao para editar a disciplina
     const editarDisciplina = (e) => {
         e.preventDefault();
-        api.patch('disciplinas' + params.id, { //patch atualiza a disciplina pelo params.id
+        api.patch('disciplinas/instituicao' + params.id, { //patch atualiza a disciplina pelo params.id
             nome,
             preRequisito: preRequisitoSelecionado || null
         })
