@@ -42,7 +42,7 @@ export const EditarDisciplina = () => {
 
     //carrega a lista de pré-requisitos
     useEffect(() => {
-        api.get('disciplinas').then(function(resposta) {
+        api.get('disciplinas/instituicao').then(function (resposta) {
             setPreRequisitos(resposta.data);
         })
     }, []);

@@ -11,12 +11,12 @@ export const HomeInstituicao = () => {
     return (
         <>
             <div>
-                <IconButton className='button-logout' color='primary' size='large' onClick={() => {localStorage.clear(); navigate("/")}}>
+                <IconButton className='button-logout' color='primary' size='large' onClick={() => { localStorage.clear(); navigate("/") }}>
                     <LogoutOutlinedIcon fontSize='inherit' />
                 </IconButton>
             </div>
-            
-            
+
+
 
             <div className='container-home-instituicao'>
 
@@ -28,7 +28,7 @@ export const HomeInstituicao = () => {
 
                     <Card className='card-cadastrar-turma' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}
                         component={Button}
-                        onClick={() => window.location.href = '/cadastro-turma'}>
+                        onClick={() => window.location.href = '/turmas-cadastradas'}>
                         <img src={ImgTurma} />
                         <CardContent>
                             <h2 className='cadastrar-turma-titulo'>
@@ -37,7 +37,9 @@ export const HomeInstituicao = () => {
                         </CardContent>
                     </Card>
 
-                    <Card className='card-cadastrar-disciplina' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button} onClick={() => window.location.href = '/cadastro-disciplina'}>
+                    <Card className='card-cadastrar-disciplina' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}
+                        component={Button}
+                        onClick={() => window.location.href = '/disciplinas-cadastradas'}>
                         <img src={ImgDisciplina} />
                         <CardContent>
                             <h2 className='cadastrar-disciplina-titulo'>
