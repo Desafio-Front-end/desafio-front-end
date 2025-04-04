@@ -95,7 +95,7 @@ export const CadastroTurma = () => {
   }
 
   useEffect(() => {
-    api.get('disciplinas').then(function (resposta) {
+    api.get('disciplinas/instituicao').then(function (resposta) {
       setDisciplinas(resposta.data);
     })
   }, [])

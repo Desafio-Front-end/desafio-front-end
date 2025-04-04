@@ -108,6 +108,7 @@ export const EditarTurma = () => {
             <div className='card-editar-turma-colunas'>
               <div className='colunas-coluna'>
                 <TextField
+                  slotProps={{ inputLabel: { shrink: !!professorSelecionado } }}
                   className='card-editar-turma-input-selector'
                   label="Professor(a)"
                   select
@@ -144,6 +145,7 @@ export const EditarTurma = () => {
               </div>
               <div className='colunas-coluna'>
                 <TextField
+                  slotProps={{ inputLabel: { shrink: !!professorSelecionado } }}
                   className='card-editar-turma-input-selector'
                   label="Disciplina"
                   select
@@ -185,7 +187,7 @@ export const EditarTurma = () => {
         </Card>
       </form>
       <Snackbar open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
-        <Alert onClose={handleCloseErro} severity='error' variant='filled' sx={{ width: '100%' }}> 
+        <Alert onClose={handleCloseErro} severity='error' variant='filled' sx={{ width: '100%' }}>
           Problema ao editar a turma!
         </Alert>
       </Snackbar>
