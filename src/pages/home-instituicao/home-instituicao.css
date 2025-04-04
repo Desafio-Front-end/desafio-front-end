@@ -57,6 +57,11 @@
     text-decoration: none;
 
 }
+.button-logout {
+    position: absolute !important;
+    top: 10px;
+    left: 10px;
+}
 
 .card-cadastrar-disciplina {
     width: 200px;

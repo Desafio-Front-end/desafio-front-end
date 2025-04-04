@@ -1,13 +1,22 @@
-import { Button, Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent, MenuItem, TextField, IconButton } from '@mui/material';
 import './home-instituicao.css';
 import ImgDisciplina from './../../assets/img-disciplina.png';
 import ImgTurma from './../../assets/img-turma.png';
-
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from 'react-router';
 
 export const HomeInstituicao = () => {
     const instituicaoNome = localStorage.getItem("nome").toUpperCase()
+    const navigate = useNavigate();
     return (
         <>
+            <div>
+                <IconButton className='button-logout' color='primary' size='large' onClick={() => {localStorage.clear(); navigate("/")}}>
+                    <LogoutOutlinedIcon fontSize='inherit' />
+                </IconButton>
+            </div>
+            
+            
 
             <div className='container-home-instituicao'>
 

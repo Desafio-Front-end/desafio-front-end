@@ -1,16 +1,23 @@
-import { Card, CardContent, Button } from '@mui/material';
+import { Card, CardContent, Button, IconButton } from '@mui/material';
 import './home-professor.css';
 import ImgDisciplina from './../../assets/img-disciplina.png';
-
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from 'react-router';
 
 
 export const HomeProfessor = () => {
     const professorNome = localStorage.getItem("nome").toUpperCase()
+    const navigate = useNavigate();
     return (
         <>
 
+            <div>
+                <IconButton className='button-logout' color='primary' size='large' onClick={() => {localStorage.clear(); navigate("/")}}>
+                    <LogoutOutlinedIcon fontSize='inherit' />
+                </IconButton>
+            </div>
 
-            <div className='container-home-professor' >
+            <div>
                 <h2 className='titulo-professor'>
                     BEM-VINDO, {professorNome}!
                 </h2>
