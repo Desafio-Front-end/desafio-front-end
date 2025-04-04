@@ -1,25 +1,19 @@
-import { Button, Card, CardContent, MenuItem, TextField } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 import './home-aluno.css';
 import ImgDisciplina from './../../assets/img-disciplina.png';
 import ImgMatricula from './../../assets/img-matricula.png';
-import ImgTurma from './../../assets/img-turma.png';
 
 
 export const HomeAluno = () => {
     const alunoNome = localStorage.getItem("nome").toUpperCase()
     return (
         <>
-            <div>
-                <h2 className='titulo-paginainicial'>
+            <div className='container-home-aluno'>
+                <h2 className='titulo-home'>
                     BEM-VINDO, {alunoNome}!
                 </h2>
-            </div>
-
-            <div className='espacamento-titulo-cards'></div>
-
-            <div className='container-home-aluno'>
-                <div onClick={() => window.location.href = '/matricula'}>
-                    <Card className='card-fazer-matricula' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                <div className='cards-content'>
+                    <Card className='card-fazer-matricula' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button} onClick={() => window.location.href = '/matricula'}>
                         <CardContent>
                             <img src={ImgMatricula} />
                             <h2 className='cadastrar-turma-titulo'>
@@ -27,12 +21,11 @@ export const HomeAluno = () => {
                             </h2>
                         </CardContent>
                     </Card>
-                </div>
 
-                <div className='espacamento-cards'></div>
 
-                <div onClick={() => window.location.href = '/disciplinas'}>
-                    <Card className='card-cadastrar-disciplinas' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }} component={Button}>
+                    <Card className='card-cadastrar-disciplinas' sx={{ maxWidth: 175, maxHeight: 300, padding: '10px' }}
+                        component={Button}
+                        onClick={() => window.location.href = '/disciplinas'}>
                         <img src={ImgDisciplina} />
                         <CardContent>
                             <h2 className='cadastrar-disciplina-titulo'>

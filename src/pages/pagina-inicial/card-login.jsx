@@ -1,4 +1,6 @@
 import { Button, Card, CardContent, TextField } from '@mui/material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import { useState } from 'react';
 import api from '../../Api';
 import { useNavigate } from 'react-router';
@@ -7,8 +9,19 @@ export const CardLogin = () => {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const navigate = useNavigate();
+
+    const [openErro, setOpenErro] = useState(false);
+    const handleCloseErro = (_, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenErro(false);
+    };
+
     const login = (e) => {
         e.preventDefault();
+        setOpenErro(false);
         api.post('auth/login',
             {
                 email,
@@ -22,9 +35,9 @@ export const CardLogin = () => {
                     localStorage.setItem("nome", resultado.data.nome);
                     if (resultado.data.tipoUsuario === 2) {
                         navigate("/home-aluno");
-                    }else if(resultado.data.tipoUsuario === 1){
+                    } else if (resultado.data.tipoUsuario === 1) {
                         navigate("/home-instituicao");
-                    }else{
+                    } else {
                         navigate("/home-professor");
                     }
 
@@ -34,6 +47,7 @@ export const CardLogin = () => {
             })
             .catch(function () {
                 console.log("Erro ao realizar login");
+                setOpenErro(true);
             })
     }
 
@@ -57,7 +71,16 @@ export const CardLogin = () => {
                 onChange={(e) => setSenha(e.target.value)}
             />
             <Button variant="contained" className='card-login-button' onClick={login}>ENTRAR</Button>
-
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
+                <Alert
+                    onClose={handleCloseErro}
+                    severity='error'
+                    variant='filled'
+                    sx={{ width: '100%' }}
+                >
+                    E-mail ou Senha incorreto!
+                </Alert>
+            </Snackbar>
         </CardContent>
     </Card>
 }
