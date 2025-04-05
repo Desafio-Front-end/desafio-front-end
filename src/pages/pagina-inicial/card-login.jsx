@@ -6,10 +6,12 @@ import api from '../../Api';
 import { useNavigate } from 'react-router';
 
 export const CardLogin = () => {
+    //USE STATES DO COMPONENTE
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    //HOOK PARA PEGAR A FUNÇÃO DE NAVEGAÇÃO DE PÁGINA
     const navigate = useNavigate();
-
+    //USE STATES E FUNÇÕES DAS MENSAGENS DE ERRO AO FAZER LOGIN
     const [openErro, setOpenErro] = useState(false);
     const handleCloseErro = (_, reason) => {
         if (reason === 'clickaway') {
@@ -18,7 +20,7 @@ export const CardLogin = () => {
 
         setOpenErro(false);
     };
-
+    //FUNÇÃO LOGIN
     const login = (e) => {
         e.preventDefault();
         setOpenErro(false);
@@ -50,7 +52,7 @@ export const CardLogin = () => {
                 setOpenErro(true);
             })
     }
-
+    //ESTRUTURA DO CARD LOGIN
     return <Card sx={{ width: 275, padding: '24px', display: 'flex', alignItems: 'center' }} >
         <CardContent className='card-login'>
             <h2 className='card-cadastro-titulo'>
@@ -70,6 +72,7 @@ export const CardLogin = () => {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
             />
+            {/* NO BUTTON EU CHAMO A FUNÇÃO  LOGIN CRIADO LÁ EM CIMA*/}
             <Button variant="contained" className='card-login-button' onClick={login}>ENTRAR</Button>
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
                 <Alert

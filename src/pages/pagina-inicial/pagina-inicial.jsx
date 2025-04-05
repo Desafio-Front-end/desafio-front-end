@@ -11,6 +11,7 @@ export const PaginaInicial = () => {
                 <h2 className='titulo-paginainicial'>
                     BEM-VINDO
                 </h2>
+                {/* CHAMNDO OS COMPONENTES CARD DE CADASTRO E CARD DE LOGIN */}
                 <div className='container-card'>
                     <CardCadastrese />
                     <CardLogin />

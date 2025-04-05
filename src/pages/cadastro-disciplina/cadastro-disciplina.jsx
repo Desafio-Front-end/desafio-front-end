@@ -8,11 +8,13 @@ import Alert from '@mui/material/Alert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export const CadastroDisciplina = () => {
+    // USE STATES DO COMPONENTE 
     const [nome, setNome] = useState("");
     const [preRequisitos, setPreRequisitos] = useState([]);
     const [preRequisitoSelecionado, setPreRequisitoSelecionado] = useState(0);
+    //HOOK PARA PEGAR A FUNÇÃO DE NAVEGAÇÃO DE PÁGINA
     const navigate = useNavigate();
-
+    //USE STATES E FUNÇÕES DAS MENSAGENS DE ERRO AO CADASTRAR DISCIPLINA
     const [openErro, setOpenErro] = useState(false);
     const handleCloseErro = (_, reason) => {
         if (reason === 'clickaway') {
@@ -22,7 +24,7 @@ export const CadastroDisciplina = () => {
         setOpenErro(false);
     };
 
-
+    //FUNÇÃO CADASTRAR DISCIPLINA
     const cadastrarDisciplina = (e) => {
         e.preventDefault();
         api.post('disciplinas', {
@@ -36,7 +38,8 @@ export const CadastroDisciplina = () => {
                 setOpenErro(true);
             })
     }
-
+    ///USE EFFECTS CRIADO PARA TRAZER A LISTA DE PRÉ REQUISITOS
+    // QUANDO A PÁGINA FOR CARREGADA INICIALMENTE
     useEffect(() => {
         api.get('disciplinas/instituicao').then(function (resposta) {
             setPreRequisitos(resposta.data);
@@ -45,11 +48,13 @@ export const CadastroDisciplina = () => {
 
     return (
         <div className='container-cadastro'>
-
+            {/* ESTRUTURA DO BOTÃO VOLTAR <--- ELE VOLTA PARA A TELA DISCIPLINAS CADASTRADAS*/}
             <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/disciplinas-cadastradas")}>
                 <ArrowBackIcon fontSize='inherit' />
             </IconButton>
 
+            {/* ESTRUTURA DO FORMULÁRIO CADASTRAR DISCIPLINA */}
+            {/* AQUI A GENTE CHAMA A FUNÇÃO CADASTRAR DISCIPLINA*/}
             <form onSubmit={cadastrarDisciplina}>
                 <Card sx={{ maxWidth: 500, padding: '24px' }} >
                     <CardContent className='card-cadastro'>
@@ -83,6 +88,7 @@ export const CadastroDisciplina = () => {
                     </CardContent>
                 </Card>
             </form>
+            {/* ESTRUTURA DA MENSAGEM DE ERRO */}
             <Snackbar open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
                 <Alert
                     onClose={handleCloseErro}

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router';
 import api from '../../Api';
 import { useMask } from '@react-input/mask';
 
+// ARRAYS PARA MAPEAR O DIA/TURNO
 const opcoesDiaDaSemana = [
   {
     value: '2',
@@ -53,6 +54,8 @@ const opcoesTurno = [
 
 
 export const CadastroTurma = () => {
+
+  //USE STATES DO COMPONENTE
   const [professores, setProfessores] = useState([]);
   const [professorSelecionado, setProfessorSelecionado] = useState(null);
   const [disciplinas, setDisciplinas] = useState([])
@@ -61,12 +64,14 @@ export const CadastroTurma = () => {
   const [anoSemestre, setAnoSemestre] = useState("");
   const [diaSelecionado, setDiaSelecionado] = useState("2");
   const [turnoSelecionado, setTurnoSelecionado] = useState("1");
+  //HOOK PARA PEGAR A FUNÇÃO DE NAVEGAÇÃO DE PÁGINA
   const navigate = useNavigate();
+  // CHAMANDO A HOOK PARA DEFINIR A MÁSCARA DO SEMESTRE ANO
   const inputRef = useMask({
     mask: '____/_',
     replacement: { '_': /\d/ },
   });
-
+  //USE STATES E FUNÇÕES DAS MENSAGENS DE ERRO AO CADASTRAR TURMA
   const [openErro, setOpenErro] = useState(false);
   const handleCloseErro = (_, reason) => {
     if (reason === 'clickaway') {
@@ -76,6 +81,7 @@ export const CadastroTurma = () => {
     setOpenErro(false);
   };
 
+  //FUNÇÃO CADASTRAR TURMA
   const cadastrarTurma = (e) => {
     e.preventDefault();
     api.post('turmas/cadastrar', {
@@ -94,12 +100,16 @@ export const CadastroTurma = () => {
       })
   }
 
+  ///USE EFFECTS CRIADO PARA TRAZER A LISTA DE DISCIPLINAS
+  // QUANDO A PÁGINA FOR CARREGADA INICIALMENTE
   useEffect(() => {
     api.get('disciplinas/instituicao').then(function (resposta) {
       setDisciplinas(resposta.data);
     })
   }, [])
 
+  //USE EFFECTS CRIADO PARA TRAZER A LISTA DE PROFESSORES
+  // QUANDO A PÁGINA FOR CARREGADA INICIALMENTE
   useEffect(() => {
     api.get('professores').then(function (resposta) {
       setProfessores(resposta.data);
@@ -109,12 +119,13 @@ export const CadastroTurma = () => {
   return (
     <>
       <div className='container-cadastro-turma'>
-
+        {/* ESTRUTURA DO BOTÃO VOLTAR <--- ELE VOLTA PARA A TELA TURMAS CADASTRADAS */}
         <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/turmas-cadastradas")}>
           <ArrowBackIcon fontSize='inherit' />
         </IconButton>
 
-
+        {/* ESTRUTURA DO FORMULÁRIO CADASTRAR TURMA */}
+        {/* AQUI A GENTE CHAMA A FUNÇÃO CADASTRAR TURMA*/}
         <form onSubmit={cadastrarTurma}>
           <Card sx={{ width: 600, padding: '24px' }} >
             <CardContent className='card-cadastro-turma'>
@@ -209,6 +220,7 @@ export const CadastroTurma = () => {
             </CardContent>
           </Card>
         </form>
+        {/* ESTRUTURA DA MENSAGEM DE ERRO */}
         <Snackbar open={openErro} autoHideDuration={5000} onClose={handleCloseErro}>
           <Alert
             onClose={handleCloseErro}

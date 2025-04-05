@@ -19,8 +19,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ptBR } from '@mui/material/locale';
+//IMPORTAS DOS COMPONENTES DO PROJETO
 
-
+//TEMA APLICADO NA APLICAÇÃO
 const theme = createTheme({
   palette: {
     primary: {
@@ -32,7 +33,7 @@ const theme = createTheme({
 function App() {
   return (
     <>
-
+      {/*ROTAS DAS TELAS - FOI UTILIZADO O REACT ROUTER*/}
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-BR">
         <ThemeProvider theme={theme}>
           <BrowserRouter>
@@ -51,8 +52,8 @@ function App() {
               <Route path="/matricula" element={<Matricula />} />
               <Route path="/disciplinas" element={<Disciplinas />} />
               <Route path="/editar-disciplina/:id" element={<EditarDisciplina />} />
-              <Route path="/editar-turma/:id" element={<EditarTurma/>} />
-              <Route path="/turmas-cadastradas/:id" element={<TurmasCadastradas/>} />
+              <Route path="/editar-turma/:id" element={<EditarTurma />} />
+              <Route path="/turmas-cadastradas/:id" element={<TurmasCadastradas />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

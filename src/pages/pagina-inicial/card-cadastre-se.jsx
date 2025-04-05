@@ -4,6 +4,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import api from '../../Api';
 
+//ARRAY TIPO USUÁRIO
 const opcoesTipoUsuarios = [
     {
         value: 1,
@@ -20,11 +21,14 @@ const opcoesTipoUsuarios = [
 ];
 
 export const CardCadastrese = () => {
+
+    //USE STATES DO COMPONENTE
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [tipoUsuario, setTipoUsuario] = useState(1);
 
+    //USE STATES E FUNÇÕES DAS MENSAGENS DE SUCESSO OU ERRO AO CADASTRAR
     const [openSucesso, setOpenSucesso] = useState(false);
     const handleCloseSucesso = (_, reason) => {
         if (reason === 'clickaway') {
@@ -43,6 +47,7 @@ export const CardCadastrese = () => {
         setOpenErro(false);
     };
 
+    //FUNÇÃO CADASTRAR
     const cadastrar = (e) => {
         e.preventDefault();
         api.post('usuarios', {
@@ -73,8 +78,11 @@ export const CardCadastrese = () => {
                 setOpenErro(true);
             });
     }
+
+    //ESTRUTURA DO CARD CADASTRE-SE
     return <Card sx={{ width: 275, padding: '24px' }} >
         <CardContent sx={{ padding: "0" }}>
+            {/* AQUI EU CHAMO A FUNÇÃO  LOGIN CRIADO LÁ EM CIMA*/}
             <form className='card-cadastrese' onSubmit={cadastrar}  >
                 <h2 className='card-cadastro-titulo'>
                     CADASTRE-SE
@@ -118,9 +126,9 @@ export const CardCadastrese = () => {
                         </MenuItem>
                     ))}
                 </TextField>
-
                 <Button variant="contained" className='card-cadastrese-button' type='submit'>CADASTRAR</Button>
             </form>
+            {/* ESTRUTURA DA MENSAGEM DE ERRO OU  SUCESSO AO CADASTRAR */}
             <Snackbar open={openSucesso} autoHideDuration={5000} onClose={handleCloseSucesso}>
                 <Alert
                     onClose={handleCloseSucesso}

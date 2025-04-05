@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-
+// OBJETOS PARA MAPEAR O DIA/TURNO
 const diasSemana = {
     2: "Segunda-feira",
     3: "Terça-feira",
@@ -27,23 +27,29 @@ const turno = {
 
 export const Matricula = () => {
 
+    //USE STATES DO COMPONENTE
     const [turmas, setTurmas] = useState([]);
     const [matriculasAluno, setMatriculasAluno] = useState([])
+    //HOOK PARA PEGAR A FUNÇÃO DE NAVEGAÇÃO DE PÁGINA
     const navigate = useNavigate();
 
+    //USE EFFECTS CRIADO PARA TRAZER A LISTA DE TURMAS 
+    // QUANDO A PÁGINA FOR CARREGADA INICIALMENTE
     useEffect(() => {
         api.get('turmas/listar').then(function (resposta) {
             setTurmas(resposta.data);
         })
     }, []);
 
+    //USE EFFECTS CRIADO PARA TRAZER A LISTA DE MATRICULAS DO ALUNO
+    // QUANDO A PÁGINA FOR CARREGADA INICIALMENTE
     useEffect(() => {
         api.get('matriculas/listarMatriculasAluno').then(function (resposta) {
-            console.log(resposta.data);
             setMatriculasAluno(resposta.data);
         })
     }, []);
 
+    //USE EFFECTS CRIADO PARA FILTRAR APENAS AS TURMAS QUE O ALUNO TEM MÁTRICULA
     useEffect(() => {
         setTurmas((oldTurmas) => {
             const turmasMatriculadas = matriculasAluno.map(matricula => matricula.idTurma)
@@ -55,7 +61,7 @@ export const Matricula = () => {
     }, [matriculasAluno]);
 
 
-
+    //FUNÇÃO MATRICULAR
     const matricular = () => {
 
         const matriculas = linhasSelecionadas.map((idTurma) =>
@@ -89,7 +95,6 @@ export const Matricula = () => {
     }
     //LÓGICA PARA SELECIONAR TODAS AS LINHAS
     const toggleAllLinhas = (event) => {
-        // NO IF 
         if (event.target.checked) {
             setLinhasSelecionadas(turmas.map(linha => linha.id))
         } else {
@@ -98,12 +103,14 @@ export const Matricula = () => {
     }
     return (
         <>
+            {/*ESTRUTURA DO BOTÃO VOLTAR <-- VOLTA PARA A TELA HOME ALUNO  */}
             <div className='container-matricula'>
                 <IconButton className='button-voltar' color='primary' size='large' onClick={() => navigate("/home-aluno")}>
                     <ArrowBackIcon fontSize='inherit' />
                 </IconButton>
                 {turmas.length === 0 ?
                     <>
+                        {/*ESTRUTURA DO CONTEÚDO DA TELA QUANDO NÃO HÁ MATRÍCULA */}
                         <div className='content-matricula-finalizada'>
                             <h2 className='tittle-matricula'>Sem matrícula disponível</h2>
                             <div className='matricula-finalizada-p'>
@@ -118,9 +125,11 @@ export const Matricula = () => {
                         </div>
                     </> :
                     <>
+                        {/*ESTRUTURA DA TABELA DE MATRICULA E DO BOTÃO MATRICULAR*/}
                         <div className='tittle-button-matricula'>
                             <h2 className='tittle-matricula'>MATRÍCULA</h2>
-                            <Button variant="contained" className='button-matricular' disabled={linhasSelecionadas.length === 0} onClick={matricular}>MATRICULAR</Button>
+                            <Button variant="contained" className='button-matricular' disabled={linhasSelecionadas.length === 0}
+                                onClick={matricular}>MATRICULAR</Button>
                         </div>
                         <TableContainer component={Paper} sx={{ marginTop: '16px' }}>
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">
